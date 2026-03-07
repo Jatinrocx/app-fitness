@@ -41,10 +41,11 @@ export function ApplicationModal({ isOpen, onClose, selectedProgram }: Applicati
 
     const getProgramPrice = (programName?: string) => {
         switch (programName) {
-            case "Beginner Blueprint": return 1999;
-            case "Monthly Coaching": return 4999;
-            case "Elite 1-on-1": return 12999;
-            default: return 1999;
+            case "Consultation Call": return 500;
+            case "Beginner Blueprint": return 999;
+            case "Monthly Coaching": return 2999;
+            case "Elite 1-on-1": return 4999;
+            default: return 999;
         }
     };
 
@@ -280,8 +281,8 @@ export function ApplicationModal({ isOpen, onClose, selectedProgram }: Applicati
                                             onChange={(e) => setPaymentMethod(e.target.value as "razorpay" | "qr")}
                                             className="w-full bg-[#0B0B0B] border border-[#F5F5F5]/10 px-4 py-3 text-[#F5F5F5] focus:outline-none focus:border-[#cc2929] transition-colors appearance-none"
                                         >
-                                            <option value="razorpay">Pay Online (Cards/NetBanking/UPI)</option>
-                                            <option value="qr">Direct Secure QR (0% Processing Fees)</option>
+                                            <option value="razorpay">Pay Online (Cards/NetBanking)</option>
+                                            <option value="qr">Direct UPI/Secure QR (0% Processing Fees)</option>
                                         </select>
                                     </div>
 

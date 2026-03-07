@@ -5,6 +5,19 @@ import { Check } from "lucide-react";
 
 const programs = [
     {
+        title: "Consultation Call",
+        price: "₹500",
+        billing: "One-time",
+        description: "A 1-on-1 30-min call to clarify all your doubts and direct your journey.",
+        features: [
+            "30-Minute Video Call",
+            "Clarify Doubts & Questions",
+            "Immediate Actionable Advice",
+            "No Long-term Commitment"
+        ],
+        highlight: false,
+    },
+    {
         title: "Beginner Blueprint",
         price: "₹999",
         billing: "One-time",
@@ -66,7 +79,7 @@ export function Programs({ onApply }: ProgramsProps) {
                     <p className="mt-4 text-[#F5F5F5]/60 tracking-wider text-sm uppercase">Select your protocol</p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {programs.map((program, index) => (
                         <motion.div
                             key={program.title}
@@ -114,7 +127,7 @@ export function Programs({ onApply }: ProgramsProps) {
                                     : "bg-[#F5F5F5] hover:bg-[#d1d1d1] text-[#0B0B0B]"
                                     }`}
                             >
-                                {program.title === "Beginner Blueprint" ? "Purchase" : "Apply Now"}
+                                {program.title === "Consultation Call" ? "Book Now" : program.title === "Beginner Blueprint" ? "Purchase" : "Apply Now"}
                             </button>
                         </motion.div>
                     ))}
