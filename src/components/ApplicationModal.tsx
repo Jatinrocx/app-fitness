@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 interface ApplicationModalProps {
     isOpen: boolean;
@@ -50,14 +51,35 @@ export function ApplicationModal({ isOpen, onClose, selectedProgram }: Applicati
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (paymentMethod === "qr") {
-            setStep(2);
-            return;
-        }
-
         setIsLoading(true);
 
         try {
+            // 0. Save Lead to Supabase
+            const { error: dbError } = await supabase
+                .from('applications')
+                .insert([
+                    {
+                        name: formData.name,
+                        age: parseInt(formData.age) || 0,
+                        level: formData.level,
+                        goal: formData.goal,
+                        commitment: formData.commitment,
+                        program: selectedProgram || "General",
+                        payment_method: paymentMethod,
+                        status: paymentMethod === 'qr' ? 'qr_pending' : 'razorpay_pending'
+                    }
+                ]);
+
+            if (dbError) {
+                console.error("Failed to save application to Supabase:", dbError);
+            }
+
+            if (paymentMethod === "qr") {
+                setIsLoading(false);
+                setStep(2);
+                return;
+            }
+
             // 1. Load Razorpay Script
             const res = await loadRazorpayScript();
             if (!res) {
@@ -104,7 +126,14 @@ export function ApplicationModal({ isOpen, onClose, selectedProgram }: Applicati
 
                     if (verifyCall.message) {
                         alert("Payment verified! Application submitted successfully.");
-                        // TODO: Save to Supabase here
+
+                        // Optionally update Supabase status to 'paid' here
+                        await supabase
+                            .from('applications')
+                            .update({ status: 'paid' })
+                            .eq('name', formData.name) // Basic match, ideal would be returning an ID from the insert above
+                            .eq('program', selectedProgram || "General");
+
                         handleClose();
                     } else {
                         alert("Payment verification failed.");
@@ -277,7 +306,7 @@ export function ApplicationModal({ isOpen, onClose, selectedProgram }: Applicati
                                     </div>
 
                                     <p className="text-sm text-[#F5F5F5]/60 bg-[#F5F5F5]/5 p-4 rounded-lg border border-[#F5F5F5]/10">
-                                        Once paid, please send a screenshot of the successful transaction on WhatsApp to <strong>+91 9634352098</strong> to activate your dashboard.
+                                        Once paid, please send a screenshot of the successful transaction on WhatsApp to <strong>+91 9634352098</strong> so we can begin your coaching program.
                                     </p>
 
                                     <button

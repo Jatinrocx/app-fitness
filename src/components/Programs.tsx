@@ -6,42 +6,40 @@ import { Check } from "lucide-react";
 const programs = [
     {
         title: "Beginner Blueprint",
-        price: "₹1,999",
+        price: "₹999",
         billing: "One-time",
         description: "The digital plan that started it all. 12 weeks of structured training.",
         features: [
             "12-Week Hypertrophy Program",
             "Macro & Nutrition Guide",
-            "Video Form Demonstrations",
-            "Lifetime Digital Access"
+            "Learn from my mistakes",
+            "Lifetime PDF Access"
         ],
         highlight: false,
     },
     {
         title: "Monthly Coaching",
-        price: "₹4,999",
+        price: "₹2,999",
         billing: "/ month",
         description: "Accountability and adjustments. For those who want more than just a PDF.",
         features: [
             "Custom Training Split",
             "Personalized Diet Macros",
             "Weekly Check-ins",
-            "Form Review via WhatsApp",
-            "Dashboard Access"
+            "Form Review via WhatsApp"
         ],
         highlight: true,
     },
     {
         title: "Elite 1-on-1",
-        price: "₹12,999",
+        price: "₹4,999",
         billing: "/ month",
         description: "The highest tier of access. Only 5 slots available at any time.",
         features: [
             "Everything in Monthly",
             "Daily Direct Access",
             "Bi-weekly Strategy Calls",
-            "Advanced Peaking Protocols",
-            "Priority Dashboard Review"
+            "Advanced Peaking Protocols"
         ],
         highlight: false,
     }
