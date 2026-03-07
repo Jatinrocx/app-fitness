@@ -60,10 +60,10 @@ export function ApplicationModal({ isOpen, onClose, selectedProgram }: Applicati
                 .from('applications')
                 .insert([
                     {
-                        name: formData.name,
-                        age: parseInt(formData.age) || 0,
-                        level: formData.level,
-                        goal: formData.goal,
+                        Name: formData.name,
+                        Age: parseInt(formData.age) || 0,
+                        Level: formData.level,
+                        Goal: formData.goal,
                         commitment: formData.commitment,
                         program: selectedProgram || "General",
                         payment_method: paymentMethod,
@@ -132,7 +132,7 @@ export function ApplicationModal({ isOpen, onClose, selectedProgram }: Applicati
                         await supabase
                             .from('applications')
                             .update({ status: 'paid' })
-                            .eq('name', formData.name) // Basic match, ideal would be returning an ID from the insert above
+                            .eq('Name', formData.name) // Basic match, ideal would be returning an ID from the insert above
                             .eq('program', selectedProgram || "General");
 
                         handleClose();
