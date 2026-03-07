@@ -298,12 +298,27 @@ export function ApplicationModal({ isOpen, onClose, selectedProgram }: Applicati
                                 <div className="space-y-6 text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
                                     <p className="text-[#F5F5F5]/80">Please scan the QR code below using any UPI app (GPay, PhonePe, Paytm) to pay <strong>₹{getProgramPrice(selectedProgram)}</strong>.</p>
 
-                                    <div className="flex justify-center my-8 relative">
-                                        <img
-                                            src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=9634352098@upi&pn=Jatin%20Fitness&am=${getProgramPrice(selectedProgram)}&cu=INR`}
-                                            alt="UPI QR Code"
-                                            className="w-64 h-64 p-4 bg-white rounded-2xl border-2 border-[#cc2929] shadow-[0_0_30px_rgba(204,41,41,0.2)]"
-                                        />
+                                    <div className="flex flex-col items-center justify-center my-8 relative gap-6">
+                                        <div className="bg-white p-4 rounded-2xl border-2 border-[#cc2929] shadow-[0_0_30px_rgba(204,41,41,0.2)]">
+                                            <img
+                                                src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=9634352098@upi&pn=Jatin%20Fitness&am=${getProgramPrice(selectedProgram)}&cu=INR`}
+                                                alt="UPI QR Code"
+                                                className="w-64 h-64"
+                                            />
+                                        </div>
+
+                                        <div className="w-full flex items-center gap-4">
+                                            <div className="h-px bg-[#F5F5F5]/10 flex-1"></div>
+                                            <span className="text-xs font-bold text-[#F5F5F5]/40 tracking-widest uppercase">OR (If on Mobile)</span>
+                                            <div className="h-px bg-[#F5F5F5]/10 flex-1"></div>
+                                        </div>
+
+                                        <a
+                                            href={`upi://pay?pa=9634352098@upi&pn=Jatin%20Fitness&am=${getProgramPrice(selectedProgram)}&cu=INR`}
+                                            className="w-full py-4 text-center bg-[#cc2929] hover:bg-[#a32020] text-[#F5F5F5] font-bold text-sm tracking-widest uppercase transition-colors rounded block"
+                                        >
+                                            Pay Directly via UPI App
+                                        </a>
                                     </div>
 
                                     <p className="text-sm text-[#F5F5F5]/60 bg-[#F5F5F5]/5 p-4 rounded-lg border border-[#F5F5F5]/10">
